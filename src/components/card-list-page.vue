@@ -1,35 +1,57 @@
 <template>
   <pre ref="markdown" v-show="false">
-# Header1
+# 抽取效果的卡片列表组件:card-list
 
-this is your job!
+hover时带有抽取效果的卡片列表组件，可以设置多种类型，
 
-<card-list style="margin: 2em 0;" :cards="cards">1231231</card-list>
+# 效果实例
 
-i lvoe you!
+<card-list style="margin: 2em 0;" :cards="cards"></card-list>
+
+# 用法
+
+    <card-list v-pre :cards="cards"></card-list>
+
+# 属性配置
+
+- cards:
+
+对象数组，每一个对象代表一个卡片，元素TS接口如下：
+
+      {
+        category: String,
+        date: String,
+        title: String,
+        content: String,
+        tags: string[],
+        link: String
+      }
+
   </pre>
   <el-main v-html="markedContent"></el-main>
 </template>
 
 <script>
 import * as marked from 'marked'
-import { ref,onMounted } from 'vue'
+import { ref,onMounted,nextTick } from 'vue'
+import hljs from 'highlight.js/lib/core';
+
 export default {
 name: "card-list-page",
   setup(){
-  const markdown = ref(null)
-  let markedContent = ref('')
+    const markdown = ref(null)
+    let markedContent = ref('')
     onMounted(()=>{
-    console.log(markdown)
-    markedContent.value = marked(markdown.value.innerHTML)
-      console.log(markdown.value.innerHTML)
-      console.log(markedContent.value)
-  })
+      markedContent.value = marked(markdown.value.innerHTML)
+      nextTick(()=>{
+        hljs.highlightAll();
+      });
+    })
   return {
     cards: [{
       category: 'Main',
       date: '2020-12-08',
-      title: 'Title 1',
+      title: 'It\'s only a fairy tale',
       content: 'Stars on the Sky.',
       tags: ['tag1', 'tag2'],
       link: '#'
@@ -62,6 +84,6 @@ name: "card-list-page",
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>

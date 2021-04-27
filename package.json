@@ -10,8 +10,11 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "element-plus": "^1.0.2-beta.41",
-    "fluent-wiz-ui": "0.0.5",
+    "fluent-wiz-ui": "0.0.6",
+    "highlight.js": "^10.7.2",
     "marked": "^2.0.3",
+    "sass": "^1.32.11",
+    "sass-loader": "^8.0.2",
     "vue": "^3.0.0"
   },
   "devDependencies": {
