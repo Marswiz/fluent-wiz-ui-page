@@ -37,18 +37,18 @@
             <el-menu-item-group>
               <el-submenu index="2-1">
                 <template #title>
-                  <span>○ Install 快速安装</span>
+                  <span>- Install 快速安装</span>
                 </template>
                 <el-menu-item-group>
-                  <el-menu-item index="2-1-1" @click="changeShown('install-page')">○ npm包管理器</el-menu-item>
+                  <el-menu-item index="2-1-1" @click="changeShown('install-page')">- npm包管理器</el-menu-item>
                 </el-menu-item-group>
               </el-submenu>
               <el-submenu v-for="(item,index) in items" :key="index" :index="'2-'+(index+2)">
                 <template #title>
-                  <span>○ {{ item.category }}</span>
+                  <span>- {{ item.category }}</span>
                 </template>
                 <el-menu-item-group v-for="(it,ind) in item.components" :key="ind">
-                  <el-menu-item @click="changeShown(it.comp)"  :index="'2-'+(index+2)+'-'+(ind+1)">○ {{it.title}}</el-menu-item>
+                  <el-menu-item @click="changeShown(it.comp)"  :index="'2-'+(index+2)+'-'+(ind+1)">- {{it.title}}</el-menu-item>
                 </el-menu-item-group>
               </el-submenu>
             </el-menu-item-group>
@@ -56,7 +56,7 @@
         </el-menu>
       </el-header>
         <!-- Show Component Details  -->
-      <el-main>
+      <el-main id="compo">
         <keep-alive>
           <component :is="compShown"></component>
         </keep-alive>
@@ -166,6 +166,9 @@ export default {
   }
   #content {
     padding-left: 0;
+  }
+  #compo {
+    padding: 0;
   }
 }
 

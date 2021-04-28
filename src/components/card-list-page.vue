@@ -6,7 +6,17 @@ hover时带有抽取效果的卡片列表组件，可以设置多种类型，
 
 # 效果实例
 
+- default
+
 <card-list style="margin: 2em 0;" :cards="cards"></card-list>
+
+- background-color = ‘#9dd6eb’ text-color = 'white'
+
+<card-list style="margin: 2em 0;" background-color="#9dd6eb" text-color='white' :cards="cards"></card-list>
+
+- background-color = "#fff" text-color = '#555' width = '400px'
+
+<card-list style="margin: 2em 0;" background-color="#fff" text-color='#555' width='400px'  :cards="cards"></card-list>
 
 # 用法
 
@@ -27,7 +37,25 @@ hover时带有抽取效果的卡片列表组件，可以设置多种类型，
         link: String
       }
 
-  </pre>
+- background-color:
+
+设置卡片的基本背景颜色，接受CSS Color值。(默认值为'#aaa')
+
+    background-color : String
+
+- text-color:
+
+设置卡片文字的颜色，接受CSS Color值。(默认值为 'rgba(255,255,255,0.8)')
+
+    text-color : String
+
+- width:
+
+设置每个卡片的宽度。(默认值'200px')
+
+    width : String
+
+</pre>
   <el-main v-html="markedContent"></el-main>
 </template>
 
