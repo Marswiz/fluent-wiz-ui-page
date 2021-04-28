@@ -1,6 +1,6 @@
 <template>
   <el-container style="height: 100vh;">
-    <el-aside width="300px" style=" box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);">
+    <el-aside id="left-sidebar" width="300px" style=" box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);">
       <el-scrollbar height="100%">
         <flex-box x-align="center" y-align="center" height="3em" style="padding: 1em 1em;cursor:pointer;" @click="changeShown('default-page')">
           <img src="../public/fluentWizLogo.svg" alt="fluentWizLogo" style="max-width: 100%; width: 100%; height: auto;">
@@ -26,10 +26,41 @@
       </el-scrollbar>
     </el-aside>
     <el-container id="content">
+      <el-header id="top-sidebar" style="padding:0;">
+        <el-menu mode="horizontal" style=" box-shadow: 0 12px 12px -12px rgba(0, 0, 0, 0.1);margin-left: .5em;">
+          <el-submenu id="collapsedIcon" index="3" style="width: 10vw;">
+            <template #title>
+              <span>
+                FluentWiz UI
+              </span>
+            </template>
+            <el-menu-item-group>
+              <el-submenu index="2-1">
+                <template #title>
+                  <span>○ Install 快速安装</span>
+                </template>
+                <el-menu-item-group>
+                  <el-menu-item index="2-1-1" @click="changeShown('install-page')">○ npm包管理器</el-menu-item>
+                </el-menu-item-group>
+              </el-submenu>
+              <el-submenu v-for="(item,index) in items" :key="index" :index="'2-'+(index+2)">
+                <template #title>
+                  <span>○ {{ item.category }}</span>
+                </template>
+                <el-menu-item-group v-for="(it,ind) in item.components" :key="ind">
+                  <el-menu-item @click="changeShown(it.comp)"  :index="'2-'+(index+2)+'-'+(ind+1)">○ {{it.title}}</el-menu-item>
+                </el-menu-item-group>
+              </el-submenu>
+            </el-menu-item-group>
+          </el-submenu>
+        </el-menu>
+      </el-header>
         <!-- Show Component Details  -->
+      <el-main>
         <keep-alive>
           <component :is="compShown"></component>
         </keep-alive>
+      </el-main>
     </el-container>
     <el-aside width="100px" style="background: transparent;">
       <flex-box direction="column" x-align="center" id="authorInfo">
@@ -49,6 +80,9 @@ import btnPage from './components/btn-page.vue'
 import installPage from './components/install-page.vue'
 import cardListPage from './components/card-list-page.vue'
 import flexBoxPage from './components/flex-box-page.vue'
+import gridBoxPage from './components/grid-box-page.vue'
+import tiktokGlitchPage from './components/tiktok-glitch-page.vue'
+
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
 hljs.registerLanguage('javascript', javascript);
@@ -59,6 +93,7 @@ export default {
     let compShown = ref('default-page')
     return {
       compShown,
+      // Change the component shown in the dynamic component: #content.
       changeShown(comp){
         compShown.value = comp
         console.log(compShown.value);
@@ -74,7 +109,7 @@ export default {
           category: 'Layout 布局',
           components: [
             {title: '弹性盒组件Flex Box', comp: 'flex-box-page'},
-            {title: '网格组件Grid Box', comp:''}
+            {title: '网格组件Grid Box', comp:'grid-box-page'}
           ]
         },
         {
@@ -87,7 +122,7 @@ export default {
         {
           category: 'Glitch 故障效果',
           components: [
-            {title: '抖音Tiktok', comp: ''}
+            {title: '抖音Tiktok', comp: 'tiktok-glitch-page'}
           ]
         },
       ]
@@ -98,11 +133,14 @@ export default {
     cardListPage,
     btnPage,
     flexBoxPage,
+    gridBoxPage,
+    tiktokGlitchPage,
     defaultPage,
   }
 }
 </script>
 <style lang="scss">
+//right info item background color defination. To implement a transition effect between two linear gradient color.
 @property --my-first-color{
   syntax: '<color>';
   inherits: false;
@@ -112,6 +150,29 @@ export default {
   syntax: '<color>';
   inherits: false;
   initial-value: #ff8c00;
+}
+
+// Mobile phone adaptation
+#top-sidebar {
+  display: none;
+}
+
+@media screen and (max-width: 700px){
+  #left-sidebar {
+    display: none;
+  }
+  #top-sidebar {
+    display: block;
+  }
+  #content {
+    padding-left: 0;
+  }
+}
+
+@media screen and (min-width: 700px){
+  #content {
+    padding-left: 2em;
+  }
 }
 
   body {
@@ -148,9 +209,10 @@ export default {
       transform: scale(1.5);
     }
   }
+
   #content{
-    padding-left: 2em;
     h1,h2,h3,h4,h5,h6{
+      font-size: 1.2em;
       &:not(:first-child){
         margin-top: 2em;
       }
@@ -176,7 +238,7 @@ export default {
       border: 2px solid gray;
     }
     img {
-      width: 800px;
+      max-width: 100%;
       margin: 1em 0;
     }
     blockquote {
