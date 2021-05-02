@@ -233,3 +233,43 @@
     
     imgInfo: String
 
+
+
+# 折叠组件 <fluent-folder>
+
+由首部(Header)和主体(Main)组成的组件，点击首部可以切换折叠隐藏主体的内容。
+
+带有平滑的过渡效果。
+
+# 效果实例
+
+<flex-box x-align="center" y-align="center" width="400px">
+<fluent-folder round key="first">
+<template #header>
+<div>Example Header</div>
+</template>
+<template #fold-banner></template>
+<template #main>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, labore molestias natus porro possimus quae! Atque autem dolores excepturi expedita minus officia perferendis! Doloribus illum minus quis sed tempore, temporibus?</template>
+</fluent-folder>
+</flex-box>
+
+# 用法
+
+    // 本身为块级元素，可以放置在其他块级或flex布局容器中
+    <fluent-folder round key="first">
+      <template #header>
+        <div>Today's Header</div>
+      </template>
+      <template #fold-banner></template>
+      <template #main>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, labore molestias natus porro possimus quae! Atque autem dolores excepturi expedita minus officia perferendis! Doloribus illum minus quis sed tempore, temporibus?</template>
+    </fluent-folder>
+
+# 属性配置
+
+- round
+
+设置是否有圆角。（默认值为false）
+
+    direction: Boolean
+    
+

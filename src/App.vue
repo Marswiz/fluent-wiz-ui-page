@@ -82,6 +82,8 @@ import cardListPage from './components/card-list-page.vue'
 import flexBoxPage from './components/flex-box-page.vue'
 import gridBoxPage from './components/grid-box-page.vue'
 import tiktokGlitchPage from './components/tiktok-glitch-page.vue'
+import folderPage from './components/folder-page.vue'
+import transferPage from './components/transfer-page.vue'
 
 import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';
@@ -106,6 +108,12 @@ export default {
           ]
         },
         {
+          category: 'Content 内容',
+          components: [
+            {title: '折叠组件Folder', comp: 'folder-page'}
+          ]
+        },
+        {
           category: 'Layout 布局',
           components: [
             {title: '弹性盒组件Flex Box', comp: 'flex-box-page'},
@@ -125,6 +133,12 @@ export default {
             {title: '抖音Tiktok', comp: 'tiktok-glitch-page'}
           ]
         },
+        {
+          category: 'Tranfer',
+          components: [
+            {title: 'Transfer', comp: 'transfer-page'}
+          ]
+        },
       ]
     }
   },
@@ -136,6 +150,8 @@ export default {
     gridBoxPage,
     tiktokGlitchPage,
     defaultPage,
+    folderPage,
+    transferPage,
   }
 }
 </script>
